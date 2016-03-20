@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script type="text/javascript">
+        var ipc = require('ipc');
+
+        // 非同期でレンダープロセスからメインプロセスにメッセージを送信する
+        function asynchronousMessage() {
+            console.log("asynchronousMessage");
+            ipc.on('asynchronous-reply', function(response) {
+                console.log("asynchronousMessage response : " + response);
+            });
+            ipc.send('asynchronous-message', 'asynchronous-message render process.');
+        }
+
+        // 同期でレンダープロセスからメインプロセスにメッセージを送信する
+        function synchronousMessage() {
+            console.log("synchronousMessage");
+            var response = ipc.sendSync('synchronous-message', 'synchronous-message render process.');
+            console.log("synchronousMessage response : " + response);
+        }
+
+        // 非同期でメインプロセスからのメッセージを受信する
+        ipc.on('main-process-message', function(args) {
+            console.log("main process message : " + args);
+        });
+    </script>
+</head>
+<body>
+<h1>Hello World!</h1>
+<button onclick="asynchronousMessage()">asynchronousMessage</button>
+<button onclick="synchronousMessage()">synchronousMessage</button>
+</body>
+</html>
