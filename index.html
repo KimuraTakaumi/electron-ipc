@@ -12,13 +12,13 @@
             ipc.on('asynchronous-reply', function(response) {
                 console.log("asynchronousMessage response : " + response);
             });
-            ipc.send('asynchronous-message', 'asynchronous-message render process.');
+            ipc.send('asynchronous-message', 'asynchronous-message renderer process.');
         }
 
         // 同期でレンダラープロセスからメインプロセスにメッセージを送信する
         function synchronousMessage() {
             console.log("synchronousMessage");
-            var response = ipc.sendSync('synchronous-message', 'synchronous-message render process.');
+            var response = ipc.sendSync('synchronous-message', 'synchronous-message renderer process.');
             console.log("synchronousMessage response : " + response);
         }
 
