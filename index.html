@@ -6,7 +6,7 @@
     <script type="text/javascript">
         var ipc = require('ipc');
 
-        // 非同期でレンダープロセスからメインプロセスにメッセージを送信する
+        // 非同期でレンダラープロセスからメインプロセスにメッセージを送信する
         function asynchronousMessage() {
             console.log("asynchronousMessage");
             ipc.on('asynchronous-reply', function(response) {
@@ -15,7 +15,7 @@
             ipc.send('asynchronous-message', 'asynchronous-message render process.');
         }
 
-        // 同期でレンダープロセスからメインプロセスにメッセージを送信する
+        // 同期でレンダラープロセスからメインプロセスにメッセージを送信する
         function synchronousMessage() {
             console.log("synchronousMessage");
             var response = ipc.sendSync('synchronous-message', 'synchronous-message render process.');
