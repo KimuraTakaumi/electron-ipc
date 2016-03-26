@@ -30,7 +30,7 @@ app.on('ready', function () {
 
     item["label"] = "asynchronous";
     item["click"] = function () {
-        // 非同期でレンダープロセスへメッセージを送信する
+        // 非同期でレンダラープロセスへメッセージを送信する
         mainWindow.webContents.send('main-process-message', 'main process send message.');
     };
     array.push(item);
@@ -44,13 +44,13 @@ app.on('window-all-closed', function () {
     }
 });
 
-// 非同期でレンダープロセスからのメッセージを受信し、メッセージを返信する
+// 非同期でレンダラープロセスからのメッセージを受信し、メッセージを返信する
 ipc.on('asynchronous-message', function (event, arg) {
     console.log("asynchronous-message arg : " + arg);
     event.sender.send('asynchronous-reply', 'asynchronous-message main process.');
 });
 
-// 同期でレンダープロセスからのメッセージを受信し、メッセージを返信する
+// 同期でレンダラープロセスからのメッセージを受信し、メッセージを返信する
 ipc.on('synchronous-message', function (event, arg) {
     console.log("synchronous-message arg : " + arg);
     event.returnValue = 'synchronous-message main process.';
